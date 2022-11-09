@@ -2,6 +2,10 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def Spotify(Show, draw):
     fSong = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 20)
@@ -13,10 +17,14 @@ def Spotify(Show, draw):
 
     scope = "user-read-currently-playing"
 
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+    client_id = os.getenv("SPOTIPY_CLIENT_ID")
+    client_secret = os.getenv("SPOTIPY_CLIENT_SECRET")
+    redirect = os.getenv("SPOTIPY_REDIRECT_URI")
+
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect, scope=scope))
 
     results = sp.current_user_playing_track()
-    
+   
     if results == None:
         draw.text((90, 94), "Nothing is \nPlaying", font=fSong, fill=None)
     else:
