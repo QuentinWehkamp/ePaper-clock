@@ -1,3 +1,4 @@
 .env
 .cache
+lib/__pycache__
 __pycache__

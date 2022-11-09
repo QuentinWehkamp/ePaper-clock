@@ -3,7 +3,6 @@ sys.path.insert(1, "./lib")
 from PIL import Image, ImageDraw, ImageFont
 import epd2in7
 import time
-from dotenv import load_dotenv
 from spotify import Spotify
 
 epd = epd2in7.EPD() # get the display
