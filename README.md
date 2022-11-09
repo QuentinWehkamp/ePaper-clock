@@ -1,1 +1,1 @@
-# ePaper-clock
+# ePaper-clock with spotify integration

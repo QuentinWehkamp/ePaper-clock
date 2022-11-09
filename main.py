@@ -3,6 +3,8 @@ sys.path.insert(1, "./lib")
 from PIL import Image, ImageDraw, ImageFont
 import epd2in7
 import time
+from dotenv import load_dotenv
+from spotify import Spotify
 
 epd = epd2in7.EPD() # get the display
 epd.init()           # initialize the display
@@ -12,11 +14,11 @@ startClock = [time.strftime("%Y", startTime), time.strftime("%b",startTime), tim
 # 0 = year, 1 = month, 2 = calander day, 3 = weekday, 4 = hour, 5 = minute, 6 = seconds
 
 epd.Clear(0xFF)      # clear the display
-
-def printToDisplay(clock):
-    HBlackImage = Image.new('1', (epd2in7.EPD_HEIGHT, epd2in7.EPD_WIDTH), 255)
     
-    draw = ImageDraw.Draw(HBlackImage) # Create draw object and pass in the image layer we want to work with (HBlackImage)
+def printClock(clock):
+    Show = Image.new('1', (epd2in7.EPD_HEIGHT, epd2in7.EPD_WIDTH), 255)
+    
+    draw = ImageDraw.Draw(Show) # Create draw object and pass in the image layer we want to work with (Show)
     font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 50) # Create our font, passing in the font file and font size
     dateFont = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 43)
     
@@ -28,13 +30,16 @@ def printToDisplay(clock):
     draw.text((143, 5), clock[3] , font = font, fill = 0) #day of the week
     draw.text((7, 52), clock[2] + " " + clock[1] + " " + clock[0], font = dateFont, fill = 0) #date
     
-    epd.display(epd.getbuffer(HBlackImage))
+    #comment if you don't want to use spotify
+    Spotify(Show, draw)
+    
+    epd.display(epd.getbuffer(Show))
 
 # clock start
-printToDisplay(startClock)
+printClock(startClock)
 
 while True:
     t = time.localtime()
     clock = [time.strftime("%Y", t), time.strftime("%b", t), time.strftime("%d", t), time.strftime("%a", t), time.strftime("%H", t), time.strftime("%M", t), time.strftime("%S", t)]
     if clock[6] == "00":
-        printToDisplay(clock)
+        printClock(clock)
