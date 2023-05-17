@@ -1,18 +1,18 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageFont
 import textwrap
 from dotenv import load_dotenv
 import os
+typeface = 'assets/fonts/FreeSansBold.otf'
 
 load_dotenv()
 
-
 def Spotify(Show, draw):
     fSong = ImageFont.truetype(
-        '/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 20)
+        typeface, 21)
     fArtist = ImageFont.truetype(
-        '/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 17)
+        typeface, 18)
 
     bmp = Image.open("assets/spotify-invert.bmp")
     Show.paste(bmp, (4, 92))
@@ -40,7 +40,7 @@ def Spotify(Show, draw):
                 songwrap = textwrap.TextWrapper(width=16)
                 song_list = songwrap.wrap(text=song)
                 wrapsong = song_list[0] + "\n" + song_list[1]
-                draw.text((90, 94), wrapsong, font=fSong, fill=None)
+                draw.text((90, 90), wrapsong, font=fSong, fill=None)
                 if len(artist) > 19:
                     artistwrap = textwrap.TextWrapper(width=19)
                     artist_list = artistwrap.wrap(text=artist)
@@ -49,7 +49,7 @@ def Spotify(Show, draw):
                 else:
                     draw.text((90, 135), artist, font=fArtist, fill=None)
             else:
-                draw.text((90, 94), song, font=fSong, fill=None)
+                draw.text((90, 90), song, font=fSong, fill=None)
                 if len(artist) > 19:
                     artistwrap = textwrap.TextWrapper(width=19)
                     artist_list = artistwrap.wrap(text=artist)

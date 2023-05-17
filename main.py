@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 import epd2in7
 import time
 from spotify import Spotify
+typeface = 'assets/fonts/FreeSansBold.otf'
 
 epd = epd2in7.EPD() # get the display
 epd.init()           # initialize the display
@@ -18,16 +19,16 @@ def printClock(clock):
     Show = Image.new('1', (epd2in7.EPD_HEIGHT, epd2in7.EPD_WIDTH), 255)
     
     draw = ImageDraw.Draw(Show) # Create draw object and pass in the image layer we want to work with (Show)
-    font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 50) # Create our font, passing in the font file and font size
-    dateFont = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSansBold.ttf', 43)
+    font = ImageFont.truetype(typeface, 49) # Create our font, passing in the font file and font size
+    dateFont = ImageFont.truetype(typeface, 43)
     
     draw.rectangle((0, 0, epd2in7.EPD_HEIGHT, epd2in7.EPD_WIDTH), fill=None, outline=None, width=4) #screen rectangle
     draw.rectangle((0, 0, 138, 50), fill=None, outline=None, width=3) #time rectangle
     draw.rectangle((135, 0, epd2in7.EPD_HEIGHT, 50), fill=None, outline=None, width=3) #day rectangle
     draw.rectangle((0, 47, epd2in7.EPD_HEIGHT, 91), fill=None, outline=None, width=3) #date rectangle
-    draw.text((7, 5), clock[4] + ":" + clock[5], font = font, fill = 0) #clock
-    draw.text((143, 5), clock[3] , font = font, fill = 0) #day of the week
-    draw.text((7, 52), clock[2] + " " + clock[1] + " " + clock[0], font = dateFont, fill = 0) #date
+    draw.text((7, -5), clock[4] + ":" + clock[5], font = font, fill = 0) #clock
+    draw.text((143, -5), clock[3] , font = font, fill = 0) #day of the week
+    draw.text((7, 43), clock[2] + " " + clock[1] + " " + clock[0], font = dateFont, fill = 0) #date
     
     #comment if you don't want to use spotify
     Spotify(Show, draw)
