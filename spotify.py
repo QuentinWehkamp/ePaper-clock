@@ -31,7 +31,7 @@ def Spotify(Show, draw):
         results = sp.current_user_playing_track()
 
         if results == None:
-            draw.text((90, 94), "Nothing is \nPlaying", font=fSong, fill=None)
+            draw.text((90, 92), "Nothing is \nPlaying", font=fSong, fill=None)
         else:
             song = (results["item"]["name"])
             artist = (results["item"]["artists"][0]["name"])
@@ -40,23 +40,23 @@ def Spotify(Show, draw):
                 songwrap = textwrap.TextWrapper(width=16)
                 song_list = songwrap.wrap(text=song)
                 wrapsong = song_list[0] + "\n" + song_list[1]
-                draw.text((90, 90), wrapsong, font=fSong, fill=None)
+                draw.text((90, 92), wrapsong, font=fSong, fill=None)
                 if len(artist) > 19:
                     artistwrap = textwrap.TextWrapper(width=19)
                     artist_list = artistwrap.wrap(text=artist)
                     wrapartist = artist_list[0] + "\n" + artist_list[1]
-                    draw.text((90, 135), wrapartist, font=fArtist, fill=None)
+                    draw.text((90, 137), wrapartist, font=fArtist, fill=None)
                 else:
-                    draw.text((90, 135), artist, font=fArtist, fill=None)
+                    draw.text((90, 137), artist, font=fArtist, fill=None)
             else:
-                draw.text((90, 90), song, font=fSong, fill=None)
+                draw.text((90, 92), song, font=fSong, fill=None)
                 if len(artist) > 19:
                     artistwrap = textwrap.TextWrapper(width=19)
                     artist_list = artistwrap.wrap(text=artist)
                     wrapartist = artist_list[0] + "\n" + artist_list[1]
-                    draw.text((90, 116), wrapartist, font=fArtist, fill=None)
+                    draw.text((90, 118), wrapartist, font=fArtist, fill=None)
                 else:
-                    draw.text((90, 116), artist, font=fArtist, fill=None)
+                    draw.text((90, 118), artist, font=fArtist, fill=None)
         return
     except:
         from datetime import datetime

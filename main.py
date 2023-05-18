@@ -26,6 +26,7 @@ def printClock(clock):
     draw.rectangle((0, 0, 138, 50), fill=None, outline=None, width=3) #time rectangle
     draw.rectangle((135, 0, epd2in7.EPD_HEIGHT, 50), fill=None, outline=None, width=3) #day rectangle
     draw.rectangle((0, 47, epd2in7.EPD_HEIGHT, 91), fill=None, outline=None, width=3) #date rectangle
+    draw.line((87, 92, epd2in7.EPD_HEIGHT, 92), fill=None, width=3)
     draw.text((7, -5), clock[4] + ":" + clock[5], font = font, fill = 0) #clock
     draw.text((143, -5), clock[3] , font = font, fill = 0) #day of the week
     draw.text((7, 43), clock[2] + " " + clock[1] + " " + clock[0], font = dateFont, fill = 0) #date
